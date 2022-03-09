@@ -68,7 +68,6 @@ public class lesson3 {
         System.out.println("Введите количество моющего средства");
         fairy = scanner.nextInt();
         while(plates > 0 && fairy > 0) {
-
             plates = plates -1 ;
             fairy = fairy - 0.5;
             System.out.println(plates);
