@@ -93,17 +93,17 @@ public class StringLesson {
 
         // конкатинация строк
 
-        String concatString = string1 + " ::: " +string2;
+        String concatString = string1 + " ::: " + string2;
 
         System.out.println(concatString);
 
         concatString = string1.concat(" --- " + string2).concat("___" + string3);
         System.out.println(concatString);
 
-        concatString = string1.join(" --- ", string2, string2,string3,frogString).concat(":::" + string3);
+        concatString = string1.join(" --- ", string2, string2, string3, frogString).concat(":::" + string3);
         System.out.println(concatString);
-        concatString= "";
-        for (int i = 0; i < 10; i ++){
+        concatString = "";
+        for (int i = 0; i < 10; i++) {
             concatString += i + "-"; //  так делать не стоит так как на каждой итерации создаётся отдельный обьект
             // и отдельная ссылка и память может переполнится.В нашем случае 10 новых обьектов в памяти.
         }
@@ -118,12 +118,12 @@ public class StringLesson {
 
         concatString = "Начало строки ";
         StringBuilder sb = new StringBuilder(concatString); // можно ничего не передавать и тогда склейка начнется с пустоты
-sb.append(string1).append(string2);
+        sb.append(string1).append(string2);
         System.out.println(sb);
 
-StringBuilder sb2 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
 
-        for (int i = 0; i < 10; i ++){
+        for (int i = 0; i < 10; i++) {
             sb2.append(i).append(" "); // лучше делать так. В этом случае на каждой итерации не создаётся
             // отдельный обьект, а происходит накопление в память.В конце создан 1 новый
             // обьект в памяти, вместо 10 обьектов.
@@ -137,19 +137,19 @@ StringBuilder sb2 = new StringBuilder();
 
         // Метод split()
         String langs = "Java, Python, JavaScript";
-        String [] langArr = langs.split(", ");
+        String[] langArr = langs.split(", ");
         System.out.println(Arrays.toString(langArr));
 
 
 //методы замены
-        String newString = langs.replaceAll(", "," - "); //заменяет во всех элементах массива и
+        String newString = langs.replaceAll(", ", " - "); //заменяет во всех элементах массива и
         // поддерживает регулярные выражения
         System.out.println(newString);
 
-        String newString1 = langs.replaceFirst(", "," - "); //заменяет только в первом элементе массива
+        String newString1 = langs.replaceFirst(", ", " - "); //заменяет только в первом элементе массива
         System.out.println(newString1);
 
-        String newString2 = langs.replace(", "," -replace "); //заменяет во всех элементах массива
+        String newString2 = langs.replace(", ", " -replace "); //заменяет во всех элементах массива
         // не поддерживает регулярные выражения
         System.out.println(newString2);
 
@@ -165,7 +165,6 @@ StringBuilder sb2 = new StringBuilder();
         System.out.println(langs.startsWith("j")); //false
 
 
-
         // Метод endsWith проверяет заканчивается ли строка с указанной последовательности символов.
         // Заканчивается --- true . Не заканчивается  --- false
         System.out.println(langs.endsWith("Script")); //true
@@ -173,9 +172,14 @@ StringBuilder sb2 = new StringBuilder();
         // Метод startsWith в этом случае проверяет начинается ли строка с индекса 1  с указанной последовательности символов().
         langs = "Java, Python, JavaScript";
 
-        System.out.println(langs.startsWith("a",1)); // true
+        System.out.println(langs.startsWith("a", 1)); // true
 
 
+        String name = "Иван";
+        String surname = "Петров";
+
+        String fullname1 = "Иван" + ""+ "Петров"; // значение fullname1 считается на моменте компиляции
+        String fullname2 = name + ""+ surname; // значение fullname2 считается на моменте исполнения программы
 
 
 
