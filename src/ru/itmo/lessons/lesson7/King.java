@@ -25,34 +25,68 @@ public class King extends Unit {
     }
 
     public void generateArmy() {
-        if ((gold - 250) < 0) throw new IllegalArgumentException("Для создания армии надо от 250 единиц золота");
+        if (gold < 250) throw new IllegalArgumentException("Для создания армии надо от 250 единиц золота. У короля "+ gold);
 
-        for (BattleUnit oneUnit : army) {
-            for (int i = 0; i < army.length; i += 1) {
-                if (i <= 3) {
-                    army[i] = knight;
-                } else {
-                    army[i] = infantry;
-                }
-            }
-        }
-        gold = gold - 250;
+        gold -= 250;
+        army = BattleUnit.getBattleUnits(20);
+//        army = new BattleUnit[20];
+//        for (int i= 0; i < army.length; i+=1 ){
+//            army[i] = BattleUnit.getBattleUnit();
+//        }
+
     }
 
     public int getBattleUnitsCount() {
         return army.length;
     }
+    // заменяет погибших юнитов
 
-    public void changeUnits() {
-        while (army.length < 25 && (gold - 20) > 0) {
-            for (int i = 0; i < army.length; i += 1) {
-                if (army[i] != null) {
-                    army[i] = knight;
-                }
+    public void changeUnits(){ //20
+        if(gold < 20){
+            System.out.println("Стоимость одного юнита 20. У короля  "+ gold);
+            return;
+        }
+        for(int i =0; i<army.length; i+=1){
+            if(gold < 20){
+                System.out.println("Стоимость одного юнита 20. У короля  "+ gold);
+                return;
+            }
+            if(army[i] !=null && army[i].isAlive()){
+                gold-=20;
+                army[i] = BattleUnit.getBattleUnit();
             }
         }
     }
 
+//    public void changeUnits() {
+//        while (army.length < 25 && (gold - 20) > 0) {
+//            for (int i = 0; i < army.length; i += 1) {
+//                if (army[i] != null) {
+//                    army[i] = knight;
+//                }
+//            }
+//        }
+//    }
+
+    // реализация абстрактного метода
+    @Override
+    public void rest(){
+       minusGold(50);
+       plusHealth(50);
+        System.out.println("Отдых короля");
+    }
+
+    public void startBattle(King enemy) {
+        // iter создаёт     for (BattleUnit unit : army) {}
+        // fori создаёт for (int i = 0; i < ; i++) {}
+        for (int i = 0; i <army.length ; i++) {
+            int unitIndex = (int)(Math.random() * army.length);
+            int enemyUnitIndex = (int)(Math.random() * enemy.army.length);
+            army[unitIndex].attack(enemy.army[enemyUnitIndex]);
+            army[unitIndex].rest();
+            enemy.army[enemyUnitIndex].rest();
+        }
+    }
 
 }
 //
